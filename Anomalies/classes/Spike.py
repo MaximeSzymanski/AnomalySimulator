@@ -5,11 +5,11 @@ class Spike(Anomaly):
     def __init__(self):
         super().__init__("Spike")
 
-    def apply_anomaly(self, data: np.ndarray, spike: float, upper_bound: float, lower_bound : float, start_index: int or None = None, end_index: int or None = None) -> np.ndarray:
+    def apply_anomaly(self, data: np.ndarray, spike_coeff: float, upper_bound: float, lower_bound : float, start_index: int or None = None, end_index: int or None = None) -> np.ndarray:
         """
         Apply the spike anomaly to the data
         :param data: The data to apply the anomaly to
-        :param spike: The spike to apply to the data
+        :param spike_coeff: The spike to apply to the data
         :param upper_bound: The upper bound of the sensor to apply the anomaly to
         :param lower_bound: The lower bound of the sensor to apply the anomaly to
         :param start_index: The start index of the anomaly
@@ -30,7 +30,7 @@ class Spike(Anomaly):
         if end_index is None:
             end_index = len(data)
 
-        data[start_index:end_index] = data[start_index:end_index] + spike
+        data[start_index:end_index] += spike_coeff * (upper_bound - lower_bound)
         data[data > upper_bound] = upper_bound
         data[data < lower_bound] = lower_bound
 

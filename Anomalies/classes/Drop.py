@@ -11,12 +11,12 @@ class Drop(Anomaly):
         super().__init__("Drop")
 
 
-    def apply_anomaly(self, data : np.ndarray, lower_bound_sensor : float, start_index : int or None = None, end_index : int or None = None) -> np.ndarray:
+    def apply_anomaly(self, data : np.ndarray, lower_bound : float, start_index : int or None = None, end_index : int or None = None) -> np.ndarray:
 
         """
         Apply the drop anomaly to the data
         :param data: The data to apply the anomaly to
-        :param lower_bound_sensor: The lower bound of the sensor to apply the anomaly to
+        :param lower_bound: The lower bound of the sensor to apply the anomaly to
         :param start_index: The start index of the anomaly
         :param end_index: The end index of the anomaly
         :return: The data with the anomaly applied
@@ -35,6 +35,6 @@ class Drop(Anomaly):
         if end_index is None:
             end_index = len(data)
 
-        data[start_index:end_index] = lower_bound_sensor
+        data[start_index:end_index] = lower_bound
 
         return data

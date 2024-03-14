@@ -8,7 +8,7 @@ class Offset(Anomaly):
         """
         Apply the offset anomaly to the data
         :param data: The data to apply the anomaly to
-        :param offset: The offset to apply to the data
+        :param offset: The offset to apply to the data (in percentage) (positive or negative)
         :param upper_bound: The upper bound of the sensor to apply the anomaly to
         :param start_index: The start index of the anomaly
         :param end_index: The end index of the anomaly
@@ -28,7 +28,7 @@ class Offset(Anomaly):
         if end_index is None:
             end_index = len(data)
 
-        data[start_index:end_index] = data[start_index:end_index] + offset
+        data[start_index:end_index] *= (1 + offset)
         data[data > upper_bound] = upper_bound
 
         return data

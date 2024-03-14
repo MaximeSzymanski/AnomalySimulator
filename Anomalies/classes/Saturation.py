@@ -11,13 +11,13 @@ class Saturation(Anomaly):
     def __init__(self):
         super().__init__("Saturation")
 
-    def apply_anomaly(self, data: np.ndarray, upper_bound_sensor: float, start_index: int or None = None,
+    def apply_anomaly(self, data: np.ndarray, upper_bound: float, start_index: int or None = None,
                       end_index: int or None = None) -> np.ndarray:
 
         """
         Apply the drop anomaly to the data
         :param data: The data to apply the anomaly to
-        :param upper_bound_sensor: The upper bound of the sensor to apply the anomaly to
+        :param upper_bound: The upper bound of the sensor to apply the anomaly to
         :param start_index: The start index of the anomaly
         :param end_index: The end index of the anomaly
         :return: The data with the anomaly applied
@@ -36,6 +36,6 @@ class Saturation(Anomaly):
         if end_index is None:
             end_index = len(data)
 
-        data[start_index:end_index] = upper_bound_sensor
+        data[start_index:end_index] = upper_bound
 
         return data
